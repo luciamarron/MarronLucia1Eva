@@ -1,6 +1,7 @@
 package com.example.marronlucia1eva;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -14,14 +15,17 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.net.URL;
+
 public class Calculadora extends AppCompatActivity {
 
     TextView resultado;
     boolean punt = true;
     boolean operacion2 = false;
-    Button cero,uno,dos,tres,cuatro,cinco,seis,siete,ocho,nueve,multiplicacion,division,suma,resta,punto,inv,borrar,igual;
+    Button cero,uno,dos,tres,cuatro,cinco,seis,siete,ocho,nueve,multiplicacion,division,suma,resta,punto,inv,borrar,igual,elevado;
     Float numero1,numero2;
     String operacion = "";
+    String url, url2;
 
 
 
@@ -29,6 +33,8 @@ public class Calculadora extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calculadora);
 
+        url = "https://web2.0calc.es";
+        url2 = "https://www.google.com/intl/es/gmail/about/";
         TextView resultado = (TextView) findViewById(R.id.resultado);
         Button cero = (Button) findViewById(R.id.cero);
         Button uno = (Button) findViewById(R.id.uno);
@@ -48,6 +54,7 @@ public class Calculadora extends AppCompatActivity {
         Button borrar = (Button) findViewById(R.id.borrar);
         Button inv = (Button) findViewById(R.id.inv);
         Button igual = (Button)findViewById(R.id.igual);
+        Button elevado = (Button)findViewById(R.id.elevado);
 
 
         cero.setOnClickListener(new View.OnClickListener() {
@@ -152,6 +159,18 @@ public class Calculadora extends AppCompatActivity {
             public void onClick(View view) {
                 String numero = (String) resultado.getText().toString();
                 resultado.setText(numero);
+            }
+        });
+
+        elevado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String numero1 = (String) resultado.getText().toString();
+                String r = "";
+                r = elevado(numero1);
+                String resultadofinal = r;
+                resultado.setText(resultadofinal);
+
             }
         });
 
@@ -391,6 +410,15 @@ public class Calculadora extends AppCompatActivity {
         return numero;
     }
 
+    public static String elevado(String numero1){
+        double elevado = 0;
+        double numeroentero1 = Double.parseDouble(numero1);
+        elevado = numeroentero1 * numeroentero1;
+
+        String numero = String.valueOf(elevado);
+        return numero;
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.xmlmenu,menu);
@@ -405,14 +433,28 @@ public class Calculadora extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), Principal.class);
                 startActivity(intent);
                 return true;
-            case R.id.Menu2:
+            case R.id.Calculadora:
                 Intent intent2 = new Intent(getApplicationContext(), Calculadora.class);
                 startActivity(intent2);
                 return true;
-            case R.id.Menu3:
+
+            case R.id.Calculadoraonline:
+                Uri uri = Uri.parse(url);
+                Intent intent4 = new Intent(Intent.ACTION_VIEW,uri);
+                startActivity(intent4);
+                return true;
+
+            case R.id.Contacto:
                 Intent intent3 = new Intent(getApplicationContext(), Contacto.class);
                 startActivity(intent3);
                 return true;
+
+            case R.id.Gmail:
+                Uri uri2 = Uri.parse(url2);
+                Intent intent5 = new Intent(Intent.ACTION_VIEW,uri2);
+                startActivity(intent5);
+                return true;
+
             default:return super.onOptionsItemSelected(item);
         }
     }

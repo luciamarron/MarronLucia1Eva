@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -26,12 +27,15 @@ public class Principal extends AppCompatActivity {
     private ImageButton miBoton;
     private ImageButton miBoton2;
     private ImageView menu;
+    String url, url2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.principal);
 
+        url = "https://web2.0calc.es";
+        url2 = "https://www.google.com/intl/es/gmail/about/";
         miTextView = (TextView) findViewById(R.id.textViewAnimado);
         registerForContextMenu(miTextView);
         miTextView.setSelected(true);
@@ -87,14 +91,28 @@ public class Principal extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), Principal.class);
                 startActivity(intent);
                 return true;
-            case R.id.Menu2:
+            case R.id.Calculadora:
                 Intent intent2 = new Intent(getApplicationContext(), Calculadora.class);
                 startActivity(intent2);
                 return true;
-            case R.id.Menu3:
+
+            case R.id.Calculadoraonline:
+                Uri uri = Uri.parse(url);
+                Intent intent4 = new Intent(Intent.ACTION_VIEW,uri);
+                startActivity(intent4);
+                return true;
+
+            case R.id.Contacto:
                 Intent intent3 = new Intent(getApplicationContext(), Contacto.class);
                 startActivity(intent3);
                 return true;
+
+            case R.id.Gmail:
+                Uri uri2 = Uri.parse(url2);
+                Intent intent5 = new Intent(Intent.ACTION_VIEW,uri2);
+                startActivity(intent5);
+                return true;
+
             default:return super.onOptionsItemSelected(item);
         }
     }

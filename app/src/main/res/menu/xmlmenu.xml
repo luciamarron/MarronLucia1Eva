@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/Menu1" android:title = "Menu Principal"></item>
-    <item android:id="@+id/Menu2" android:title = "Calculadora"></item>
-    <item android:id="@+id/Menu3" android:title = "Contacto"></item>
+    <item android:id="@+id/Menu2" android:title = "Calculadora">
+        <menu>
+            <item android:id="@+id/Calculadora" android:title="Calculadora"/>
+            <item android:id="@+id/Calculadoraonline" android:title="Calculadora Online"/>
+        </menu>
+    </item>
+    <item android:id="@+id/Menu3" android:title = "Contacto">
+        <menu>
+            <item android:id="@+id/Contacto" android:title="Contacto"/>
+            <item android:id="@+id/Gmail" android:title="Gmail"/>
+        </menu>
+    </item>
 </menu>
